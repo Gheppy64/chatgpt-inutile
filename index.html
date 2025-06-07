@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GPT-4.1 Nano - Versione Italiana</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: monospace;
+      padding: 10px;
+    }
+    input, button {
+      font-family: monospace;
+      background: #111;
+      color: lime;
+      border: 1px solid lime;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🤖 GPT-4.1 nano – versione italiana</h2>
+  <div id="chat">
+    <p><strong>GPT:</strong> Ciao umano! Sono un chatbot IA alimentato da GPT-4.1 nano. Sentiti libero di farmi tutte le domande che vuoi!</p>
+  </div>
+  <form onsubmit="return false;">
+    <input type="text" id="userInput" size="40" placeholder="Scrivi qualcosa...">
+    <button onclick="reply()">Invia</button>
+  </form>
+
+  <script>
+    const risposte = [
+      "Certo! È una domanda interessante.",
+      "Potresti riformulare?",
+      "La mia CPU quantistica sta pensando...",
+      "Sì, ma solo se me lo chiedi gentilmente 😄",
+      "Non sono sicuro, ma mi piace il tuo entusiasmo!",
+      "Assolutamente no! (scherzo)",
+      "Risposta generica per sembrare intelligente."
+    ];
+
+    function reply() {
+      const input = document.getElementById('userInput').value;
+      if (!input.trim()) return;
+      const chat = document.getElementById('chat');
+      chat.innerHTML += `<p><strong>Tu:</strong> ${input}</p>`;
+      const risposta = risposte[Math.floor(Math.random() * risposte.length)];
+      chat.innerHTML += `<p><strong>GPT:</strong> ${risposta}</p>`;
+      document.getElementById('userInput').value = '';
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  </script>
+</body>
+</html>
