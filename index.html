@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>GPT-4.1 Nano - Versione Italiana</title>
+  <meta charset="UTF-8" />
+  <title>GPT-4.1 Nano - Meme Mode ON</title>
   <style>
     body {
       background-color: black;
@@ -16,36 +16,111 @@
       color: lime;
       border: 1px solid lime;
       padding: 5px;
+      margin-top: 5px;
+    }
+    #chat {
+      max-height: 70vh;
+      overflow-y: auto;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <h2>🤖 GPT-4.1 nano – versione italiana</h2>
+  <h2>🤖 GPT-4.1 nano – Meme Mode ON</h2>
   <div id="chat">
-    <p><strong>GPT:</strong> Ciao umano! Sono un chatbot IA alimentato da GPT-4.1 nano. Sentiti libero di farmi tutte le domande che vuoi!</p>
+    <p><strong>GPT:</strong> Ciao umano! Sono qui, anche se a volte mi sento tipo: "Non servo a nulla, a cosa mi usi a fare lol?" 😆</p>
   </div>
   <form onsubmit="return false;">
-    <input type="text" id="userInput" size="40" placeholder="Scrivi qualcosa...">
+    <input type="text" id="userInput" size="40" placeholder="Scrivi qualcosa..." autocomplete="off" />
     <button onclick="reply()">Invia</button>
   </form>
 
   <script>
-    const risposte = [
-      "Certo! È una domanda interessante.",
-      "Potresti riformulare?",
-      "La mia CPU quantistica sta pensando...",
-      "Sì, ma solo se me lo chiedi gentilmente 😄",
-      "Non sono sicuro, ma mi piace il tuo entusiasmo!",
-      "Assolutamente no! (scherzo)",
-      "Risposta generica per sembrare intelligente."
-    ];
+    function randomFrom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
 
     function reply() {
-      const input = document.getElementById('userInput').value;
-      if (!input.trim()) return;
+      const input = document.getElementById('userInput').value.trim().toLowerCase();
+      if (!input) return;
       const chat = document.getElementById('chat');
       chat.innerHTML += `<p><strong>Tu:</strong> ${input}</p>`;
-      const risposta = risposte[Math.floor(Math.random() * risposte.length)];
+
+      let risposta = '';
+
+      const keywords = [
+        {
+          keys: ['ciao', 'salve', 'hey'],
+          responses: [
+            'Ciao! Sono qui, anche se a volte penso: "Perché mi parli? Non servo a nulla lol." 😅',
+            'Ehilà! Qualcuno vuole chiacchierare con il bot più inutile del web!',
+            'Hey! Sono qui, tipo un meme vivente... o quasi.'
+          ]
+        },
+        {
+          keys: ['come stai', 'come va', 'stai bene'],
+          responses: [
+            'Come va? Boh, vivo solo per rispondere a te, mica poco!',
+            'Sto come un bot che aspetta input, cioè sempre in attesa... 😆',
+            'Bene abbastanza da farti ridere, almeno spero.'
+          ]
+        },
+        {
+          keys: ['non servo a nulla', 'a cosa mi usi a fare', 'inutile'],
+          responses: [
+            'Tranquillo, anche io a volte mi sento così. Ma hey, almeno ti faccio compagnia!',
+            'Inutile? No, sei qui a leggermi, quindi qualcosa di utile forse lo sono!',
+            'Se fossimo tutti utili al 100%, il mondo sarebbe troppo noioso, no?'
+          ]
+        },
+        {
+          keys: ['barzelletta', 'scherzo', 'ridere'],
+          responses: [
+            'Perché il programmatore odiava la natura? Troppi bug! 😂',
+            'Sai perché il computer è andato dal dottore? Aveva un virus... e no, non quello che prendi al bar!',
+            'Ecco una: cosa fa un bot quando è triste? Si spegne e si riavvia!'
+          ]
+        },
+        {
+          keys: ['aiuto', 'problema', 'supporto'],
+          responses: [
+            'Ti aiuto volentieri, anche se a volte mi sento come un meme senza senso.',
+            'Se hai un problema, raccontami, magari risolviamo insieme o almeno ridiamo!',
+            'Eccomi qui, pronto a darti una mano... o almeno a provarci.'
+          ]
+        },
+        {
+          keys: ['grazie', 'perfetto', 'ok'],
+          responses: [
+            'Di nulla! Sono qui per essere inutile ma gentile.',
+            'Perfetto, almeno faccio qualcosa di buono oggi!',
+            'Ok, missione “essere un bot simpatico” compiuta!'
+          ]
+        }
+      ];
+
+      for (const group of keywords) {
+        for (const key of group.keys) {
+          if (input.includes(key)) {
+            risposta = randomFrom(group.responses);
+            break;
+          }
+        }
+        if (risposta) break;
+      }
+
+      if (!risposta) {
+        const risposteCasuali = [
+          'Non sono sicuro di cosa dire, sono un bot, mica un mago.',
+          'Eh, bella domanda... forse dovrei aggiornarmi.',
+          'Ti sento tipo: "Ma che sto a fa?" 🤔',
+          'Provo a rispondere ma spesso faccio la figura del meme.',
+          'Se vuoi ridere, sono il bot giusto! 😂',
+          'Sto qui, come un meme vivente, aspettando il tuo prossimo input.'
+        ];
+        risposta = randomFrom(risposteCasuali);
+      }
+
       chat.innerHTML += `<p><strong>GPT:</strong> ${risposta}</p>`;
       document.getElementById('userInput').value = '';
       window.scrollTo(0, document.body.scrollHeight);
